@@ -1,0 +1,24 @@
+{
+    "ambi" : {
+        "label" : {
+          "name":          "Name",
+          "clientId":      "Client Id",
+          "clientSecret":  "Client Secret",
+          "username":      "Username",
+          "password":      "Password",
+          "room_name":     "Room Name",
+          "location_name": "Location Name"
+        },
+        "placeholder" : {
+          "name":          "Name",
+          "clientId":      "Client Id as per value on Ambi Dev Portal",
+          "clientSecret":  "Client Secret as per value on Ambi Dev Portal",
+          "username":      "Ambi Climate User email",
+          "password":      "Ambi Climate Password",
+          "room_name":     "Room Name as defined within Ambi Climate App",
+          "location_name": "Location Name as defined within Ambi Climate App"
+        },
+        "error" : {
+        }
+    }
+}

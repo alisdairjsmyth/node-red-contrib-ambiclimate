@@ -1,0 +1,28 @@
+{
+  "name": "node-red-contrib-ambiclimate",
+  "description": "A collection of Node-RED nodes to control Ambi Climate devices.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alisdairjsmyth/node-red-contrib-ambiclimate.git"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "node-red",
+    "ambi+climate",
+    "air+conditioner",
+    "home+automation"
+  ],
+  "node-red": {
+    "nodes": {
+      "ambi": "ambi/ambi.js"
+    }
+  },
+  "author": {
+    "name": "Alisdair Smyth",
+    "email": "alisdair.smyth@gmail.com"
+  },
+  "dependencies": {
+    "node-ambiclimate": "2.1.x"
+  }
+}

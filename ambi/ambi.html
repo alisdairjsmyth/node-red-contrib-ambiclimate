@@ -1,0 +1,105 @@
+<!--
+  Copyright 2017 Alisdair Smyth
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!--
+  Configuration Node
+-->
+<script type="text/x-red" data-template-name="ambi-config">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-config-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-clientId"><i class="fa fa-user"></i> <span data-i18n="ambi.label.clientId"></span></label>
+        <input type="text" id="node-config-input-clientId">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-clientSecret"><i class="fa fa-user-secret"></i> <span data-i18n="ambi.label.clientSecret"></span></label>
+        <input type="text" id="node-config-input-clientSecret">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-username"><i class="fa fa-envelope-o"></i> <span data-i18n="ambi.label.username"></span></label>
+        <input type="text" id="node-config-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-key"></i> <span data-i18n="ambi.label.password"></span></label>
+        <input type="text" id="node-config-input-password">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-config",{
+        category: "config",
+        defaults: {
+            clientId: {value:"",required:true},
+            clientSecret: {value: "", required:true},
+            username: {value: "", required:true},
+            password: {value: "", required:true}
+        },
+        label: function() {
+            return this.name || this.clientId;
+        }
+    });
+</script>
+
+<!--
+  Power Off
+-->
+<script type="text/x-red" data-template-name="ambi-power-off">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-power-off">
+   <p>Power off your AC.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+   </ul>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-power-off",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Power Off";
+        }
+    });
+</script>
