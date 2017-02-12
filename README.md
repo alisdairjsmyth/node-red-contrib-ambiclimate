@@ -20,18 +20,32 @@ Each node can be configured, or can receive settings in the triggering `msg`.
 Power off your AC
 
 Sample input `msg.payload`:
-
-  {
-    "room_name": "Bedroom",
-    "location_name": "Home"
-  }
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home"
+}
+```
 
 ### Comfort Mode
 Enable Comfort mode on your AC
 
 Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home"
+}
+```
 
-  {
-    "room_name": "Bedroom",
-    "location_name": "Home"
-  }
+### Away Temperature Lower
+Enable Away mode and set an lower bound for temperature. Ambi will try to keep temperature above the lower bound.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "value": 15
+}
+```
