@@ -19,6 +19,7 @@
           "location_name": "Location Name as defined within Ambi Climate App"
         },
         "error" : {
+          "unspecified_device": "Device is neither specified in config or msg.payload: "
         }
     }
 }

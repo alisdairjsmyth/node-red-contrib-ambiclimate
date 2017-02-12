@@ -39,14 +39,49 @@ module.exports = function(RED) {
         room_name: room_name,
         location_name: location_name
       };
-      this.log("Power Off: "+room_name+"@"+location_name);
-      client.off(settings, function (err, data) {
-        if (err) {
-          this.error(err);
-          return;
-        }
+
+      if (!room_name || !location_name) {
+        this.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+      } else {
+        this.log("Power Off: "+room_name+"@"+location_name);
+        client.off(settings, function (err, data) {
+          if (err) {
+            this.error(err);
+            return;
+          }
       });
+    }
     });
   }
   RED.nodes.registerType("ambi-power-off",ambiPowerOff);
+
+  function ambiComfort(n) {
+    RED.nodes.createNode(this,n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+
+    this.on('input', function(msg) {
+      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
+      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name
+      };
+
+      if (!room_name || !location_name) {
+        this.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+      } else {
+        this.log("Comfort Mode: "+room_name+"@"+location_name);
+        client.comfort(settings, function (err, data) {
+          if (err) {
+            this.error(err);
+            return;
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-comfort-mode",ambiComfort);
 }

@@ -10,7 +10,7 @@ Run the following command in the root directory of your Node-RED install
 
 ## OAuth Client
 
-Register a OAuth Client in the <a href="https://api.ambiclimate.com/" target="_new">Ambi Dev Portal</a> by following the steps on the Quick Start page.  You require the Client Id and Client Secret of that client in order to use this wrapper.
+Register a OAuth Client in the <a href="https://api.ambiclimate.com/" target="_new">Ambi Dev Portal</a> by following the steps on the Quick Start page.  You require the Client Id and Client Secret of that client in order to use this node.
 
 ## Usage
 Separate nodes are provided for each of the capabilities of the LIFX HTTP Remote Control API.
@@ -21,7 +21,17 @@ Power off your AC
 
 Sample input `msg.payload`:
 
-    {
-        "room_name": "Bedroom",
-        "location_name": "Home"
-    }
+  {
+    "room_name": "Bedroom",
+    "location_name": "Home"
+  }
+
+### Comfort Mode
+Enable Comfort mode on your AC
+
+Sample input `msg.payload`
+
+  {
+    "room_name": "Bedroom",
+    "location_name": "Home"
+  }
