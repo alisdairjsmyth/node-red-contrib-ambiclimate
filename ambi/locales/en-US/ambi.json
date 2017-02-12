@@ -7,7 +7,8 @@
           "username":      "Username",
           "password":      "Password",
           "room_name":     "Room Name",
-          "location_name": "Location Name"
+          "location_name": "Location Name",
+          "temperature":   "Temperature"
         },
         "placeholder" : {
           "name":          "Name",
@@ -16,7 +17,8 @@
           "username":      "Ambi Climate User email",
           "password":      "Ambi Climate Password",
           "room_name":     "Room Name as defined within Ambi Climate App",
-          "location_name": "Location Name as defined within Ambi Climate App"
+          "location_name": "Location Name as defined within Ambi Climate App",
+          "temperature":   "Target temperature in Celsius"
         },
         "error" : {
           "unspecified_device": "Device is neither specified in config or msg.payload: "
