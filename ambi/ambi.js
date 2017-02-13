@@ -148,4 +148,36 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType("ambi-away-temp-upper",ambiAwayTempUpper);
+
+  function ambiAwayHumidityUpper(n) {
+    RED.nodes.createNode(this,n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+
+    this.on('input', function(msg) {
+      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
+      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+      var value         = (typeof msg.payload.value         != "undefined") ? msg.payload.value         : n.value;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name,
+        value: value
+      };
+
+      if (!room_name || !location_name) {
+        this.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+      } else {
+        this.log("Away Humidity Upper: "+room_name+"@"+location_name+" "+value+"C");
+        client.away_humidity_upper(settings, function (err, data) {
+          if (err) {
+            this.error(err);
+            return;
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-away-humidity-upper",ambiAwayHumidityUpper);
 }

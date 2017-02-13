@@ -61,3 +61,15 @@ Sample input `msg.payload`
   "value": 22
 }
 ```
+
+### Away Humidity Upper
+Enable Away mode and set an upper bound for humidity. Ambi will try to keep humidity below the upper bound.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "value": 70
+}
+```
