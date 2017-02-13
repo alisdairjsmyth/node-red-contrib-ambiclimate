@@ -49,3 +49,15 @@ Sample input `msg.payload`
   "value": 15
 }
 ```
+
+### Away Temperature Upper
+Enable Away mode on your AC to stay above target temperature. Ambi will try to keep temperature below the upper bound.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "value": 22
+}
+```
