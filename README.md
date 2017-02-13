@@ -73,3 +73,15 @@ Sample input `msg.payload`
   "value": 70
 }
 ```
+
+### Temperature Mode
+Enable Temperature mode on your AC
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "value": 24
+}
+```

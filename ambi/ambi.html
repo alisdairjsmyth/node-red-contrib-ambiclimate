@@ -317,3 +317,58 @@
         }
     });
 </script>
+
+<!--
+  Temperature Mode
+-->
+<script type="text/x-red" data-template-name="ambi-temp-mode">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-value"><i class="fa fa-thermometer-empty"></i> <span data-i18n="ambi.label.temperature"></span></label>
+        <input type="text" id="node-input-value" data-i18n="[placeholder]ambi.placeholder.temperature">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-temp-mode">
+   <p>Enable Temperature mode on your AC.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+       <li> <code>value</code>: The target temperature in Celsius.</li>
+   </ul>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-temp-mode",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""},
+            "value": {value:""}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Temperature Mode";
+        }
+    });
+</script>
