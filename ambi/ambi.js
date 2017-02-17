@@ -257,4 +257,43 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType("ambi-sensor-temp",ambiCurrentTemp);
+
+  function ambiCurrentHumidity(n) {
+    RED.nodes.createNode(this,n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node   = this;
+
+    this.on('input', function(msg) {
+      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
+      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name
+      };
+
+      if (!room_name || !location_name) {
+        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name);
+        return;
+      } else {
+        node.log("Sensor Humidity: "+room_name+"@"+location_name);
+        client.sensor_humidity(settings, function (err, data) {
+          if (err) {
+            node.error(err);
+          } else {
+            msg.payload = {
+              room_name: room_name,
+              location_name: location_name,
+              created_on: data[0].created_on,
+              value: data[0].value
+            };
+            node.send(msg);
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-sensor-humidity",ambiCurrentHumidity);
 }

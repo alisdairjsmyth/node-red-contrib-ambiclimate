@@ -106,3 +106,24 @@ Sample output `msg.payload`
   "value": 28.970001220703125
 }
 ```
+
+### Sensor Humidity
+Get latest sensor humidity data.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home"
+}
+```
+
+Sample output `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "created_on": "2016-08-19T08:08:01+00:00",
+  "value": 68.08000183105469
+}
+```

@@ -424,7 +424,63 @@
         icon: "debug.png",
         color: "#FFFFFF",
         label: function() {
-            return this.name || "Temperature Mode";
+            return this.name || "Current Temperature";
+        }
+    });
+</script>
+
+<!--
+  Sensor Humidity
+-->
+<script type="text/x-red" data-template-name="ambi-sensor-humidity">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-sensor-humidity">
+  <p>Get latest sensor humidity data.</p>
+  <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+  </ul>
+  <p>The node outputs a <code>msg.payload</code> with the latest temperature reading in the follwing format:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+    <li> <code>created_on</code>: Timestamp of the latest reading.</li>
+    <li> <code>value</code>: Latest recorded percentage humidity</li>
+  </ul>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-sensor-humidity",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Current Humidity";
         }
     });
 </script>
