@@ -85,3 +85,24 @@ Sample input `msg.payload`
   "value": 24
 }
 ```
+
+### Sensor Temperature
+Get latest sensor temperature data.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home"
+}
+```
+
+Sample output `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "created_on": "2016-08-19T08:08:01+00:00",
+  "value": 28.970001220703125
+}
+```
