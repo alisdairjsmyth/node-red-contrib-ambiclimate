@@ -127,3 +127,24 @@ Sample output `msg.payload`
   "value": 68.08000183105469
 }
 ```
+
+### Current Mode
+Get Ambi Climate's current working mode.
+
+Sample input `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home"
+}
+```
+
+Sample output `msg.payload`
+```json
+{
+  "room_name": "Bedroom",
+  "location_name": "Home",
+  "mode": "Away_Temperature_Upper",
+  "value": 25
+}
+```

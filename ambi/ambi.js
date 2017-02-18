@@ -296,4 +296,43 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType("ambi-sensor-humidity",ambiCurrentHumidity);
+
+  function ambiCurrentMode(n) {
+    RED.nodes.createNode(this,n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node   = this;
+
+    this.on('input', function(msg) {
+      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
+      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name
+      };
+
+      if (!room_name || !location_name) {
+        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name);
+        return;
+      } else {
+        node.log("Current Mode: "+room_name+"@"+location_name);
+        client.mode(settings, function (err, data) {
+          if (err) {
+            node.error(err);
+          } else {
+            msg.payload = {
+              room_name: room_name,
+              location_name: location_name,
+              mode: data.mode,
+              value: data.value
+            };
+            node.send(msg);
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-mode",ambiCurrentMode);
 }
