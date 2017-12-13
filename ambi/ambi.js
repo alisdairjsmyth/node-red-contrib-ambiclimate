@@ -15,68 +15,90 @@
  **/
 module.exports = function(RED) {
   "use strict";
-  var ac = require('node-ambiclimate');
+  var ac = require("node-ambiclimate");
 
   function ambiConfig(n) {
-    RED.nodes.createNode(this,n);
-    this.name   = n.name;
+    RED.nodes.createNode(this, n);
+    this.name = n.name;
 
     this.client = new ac(n.clientId, n.clientSecret, n.username, n.password);
   }
-  RED.nodes.registerType("ambi-config",ambiConfig);
+  RED.nodes.registerType("ambi-config", ambiConfig);
 
   function ambiPowerOff(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
-    var node   = this;
+    var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
       var settings = {
         room_name: room_name,
         location_name: location_name
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Power Off: "+room_name+"@"+location_name);
-        client.off(settings, function (err, data) {
+        node.log("Power Off: " + room_name + "@" + location_name);
+        client.off(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
           }
-      });
-    }
+        });
+      }
     });
   }
-  RED.nodes.registerType("ambi-power-off",ambiPowerOff);
+  RED.nodes.registerType("ambi-power-off", ambiPowerOff);
 
   function ambiComfort(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
     var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
       var settings = {
         room_name: room_name,
         location_name: location_name
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Comfort Mode: "+room_name+"@"+location_name);
-        client.comfort(settings, function (err, data) {
+        node.log("Comfort Mode: " + room_name + "@" + location_name);
+        client.comfort(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
@@ -85,20 +107,27 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-comfort-mode",ambiComfort);
+  RED.nodes.registerType("ambi-comfort-mode", ambiComfort);
 
   function ambiAwayTempLower(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
     var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
-      var value         = (typeof msg.payload.value         != "undefined") ? msg.payload.value         : n.value;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var value =
+        typeof msg.payload.value != "undefined" ? msg.payload.value : n.value;
       var settings = {
         room_name: room_name,
         location_name: location_name,
@@ -106,10 +135,23 @@ module.exports = function(RED) {
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Away Temperature Lower: "+room_name+"@"+location_name+" "+value+"C");
-        client.away_temperature_lower(settings, function (err, data) {
+        node.log(
+          "Away Temperature Lower: " +
+            room_name +
+            "@" +
+            location_name +
+            " " +
+            value +
+            "C"
+        );
+        client.away_temperature_lower(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
@@ -118,20 +160,27 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-away-temp-lower",ambiAwayTempLower);
+  RED.nodes.registerType("ambi-away-temp-lower", ambiAwayTempLower);
 
   function ambiAwayTempUpper(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
     var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
-      var value         = (typeof msg.payload.value         != "undefined") ? msg.payload.value         : n.value;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var value =
+        typeof msg.payload.value != "undefined" ? msg.payload.value : n.value;
       var settings = {
         room_name: room_name,
         location_name: location_name,
@@ -139,10 +188,23 @@ module.exports = function(RED) {
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Away Temperature Upper: "+room_name+"@"+location_name+" "+value+"C");
-        client.away_temperature_upper(settings, function (err, data) {
+        node.log(
+          "Away Temperature Upper: " +
+            room_name +
+            "@" +
+            location_name +
+            " " +
+            value +
+            "C"
+        );
+        client.away_temperature_upper(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
@@ -151,20 +213,27 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-away-temp-upper",ambiAwayTempUpper);
+  RED.nodes.registerType("ambi-away-temp-upper", ambiAwayTempUpper);
 
   function ambiAwayHumidityUpper(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
     var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
-      var value         = (typeof msg.payload.value         != "undefined") ? msg.payload.value         : n.value;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var value =
+        typeof msg.payload.value != "undefined" ? msg.payload.value : n.value;
       var settings = {
         room_name: room_name,
         location_name: location_name,
@@ -172,10 +241,23 @@ module.exports = function(RED) {
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Away Humidity Upper: "+room_name+"@"+location_name+" "+value+"%");
-        client.away_humidity_upper(settings, function (err, data) {
+        node.log(
+          "Away Humidity Upper: " +
+            room_name +
+            "@" +
+            location_name +
+            " " +
+            value +
+            "%"
+        );
+        client.away_humidity_upper(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
@@ -184,20 +266,27 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-away-humidity-upper",ambiAwayHumidityUpper);
+  RED.nodes.registerType("ambi-away-humidity-upper", ambiAwayHumidityUpper);
 
   function ambiTempMode(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
     var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
-      var value         = (typeof msg.payload.value         != "undefined") ? msg.payload.value         : n.value;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var value =
+        typeof msg.payload.value != "undefined" ? msg.payload.value : n.value;
       var settings = {
         room_name: room_name,
         location_name: location_name,
@@ -205,10 +294,23 @@ module.exports = function(RED) {
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name)
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
       } else {
-        node.log("Temperature Mode: "+room_name+"@"+location_name+" "+value+"C");
-        client.temperature(settings, function (err, data) {
+        node.log(
+          "Temperature Mode: " +
+            room_name +
+            "@" +
+            location_name +
+            " " +
+            value +
+            "C"
+        );
+        client.temperature(settings, function(err, data) {
           if (err) {
             node.error(err);
             return;
@@ -217,30 +319,41 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-temp-mode",ambiTempMode);
+  RED.nodes.registerType("ambi-temp-mode", ambiTempMode);
 
   function ambiCurrentTemp(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
-    var node   = this;
+    var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
       var settings = {
         room_name: room_name,
         location_name: location_name
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name);
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
         return;
       } else {
-        node.log("Sensor Temperature: "+room_name+"@"+location_name);
-        client.sensor_temperature(settings, function (err, data) {
+        node.log("Sensor Temperature: " + room_name + "@" + location_name);
+        client.sensor_temperature(settings, function(err, data) {
           if (err) {
             node.error(err);
           } else {
@@ -256,30 +369,41 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-sensor-temp",ambiCurrentTemp);
+  RED.nodes.registerType("ambi-sensor-temp", ambiCurrentTemp);
 
   function ambiCurrentHumidity(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
-    var node   = this;
+    var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
       var settings = {
         room_name: room_name,
         location_name: location_name
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name);
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
         return;
       } else {
-        node.log("Sensor Humidity: "+room_name+"@"+location_name);
-        client.sensor_humidity(settings, function (err, data) {
+        node.log("Sensor Humidity: " + room_name + "@" + location_name);
+        client.sensor_humidity(settings, function(err, data) {
           if (err) {
             node.error(err);
           } else {
@@ -295,30 +419,41 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-sensor-humidity",ambiCurrentHumidity);
+  RED.nodes.registerType("ambi-sensor-humidity", ambiCurrentHumidity);
 
   function ambiCurrentMode(n) {
-    RED.nodes.createNode(this,n);
+    RED.nodes.createNode(this, n);
 
     // Retrieve the config node
     var oauthClient = RED.nodes.getNode(n.oauthClient);
     var client = oauthClient.client;
-    var node   = this;
+    var node = this;
 
-    this.on('input', function(msg) {
-      var room_name     = (typeof msg.payload.room_name     != "undefined") ? msg.payload.room_name     : n.room_name;
-      var location_name = (typeof msg.payload.location_name != "undefined") ? msg.payload.location_name : n.location_name;
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
       var settings = {
         room_name: room_name,
         location_name: location_name
       };
 
       if (!room_name || !location_name) {
-        node.error(RED._("ambi.error.unspecified_device") + room_name+"@"+location_name);
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
         return;
       } else {
-        node.log("Current Mode: "+room_name+"@"+location_name);
-        client.mode(settings, function (err, data) {
+        node.log("Current Mode: " + room_name + "@" + location_name);
+        client.mode(settings, function(err, data) {
           if (err) {
             node.error(err);
           } else {
@@ -334,5 +469,5 @@ module.exports = function(RED) {
       }
     });
   }
-  RED.nodes.registerType("ambi-mode",ambiCurrentMode);
-}
+  RED.nodes.registerType("ambi-mode", ambiCurrentMode);
+};
