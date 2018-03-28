@@ -1,0 +1,105 @@
+<script type="text/x-red" data-help-name="ambi-power-off">
+   <p>Power off your AC.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-comfort-mode">
+   <p>Enable Comfort mode on your AC</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-away-temp-lower">
+   <p>Enable Away mode and set an lower bound for temperature. Ambi will try to keep temperature above the lower bound.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+       <li> <code>value</code>: The target temperature in Celsius.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-away-temp-upper">
+   <p>Enable Away mode on your AC to stay above target temperature. Ambi will try to keep temperature below the upper bound.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+       <li> <code>value</code>: The target temperature in Celsius.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-away-humidity-upper">
+   <p>Enable Away mode on your AC to stay above target temperature. Ambi will try to keep temperature below the upper bound.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+       <li> <code>value</code>: The value in percent relative humidity.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-temp-mode">
+   <p>Enable Temperature mode on your AC.</p>
+   <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+   <ul>
+       <li> <code>room_name</code>: The name of the room.</li>
+       <li> <code>location_name</code>: The name of the location.</li>
+       <li> <code>value</code>: The target temperature in Celsius.</li>
+   </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-sensor-temp">
+  <p>Get latest sensor temperature data.</p>
+  <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+  </ul>
+  <p>The node outputs a <code>msg.payload</code> with the latest temperature reading in the follwing format:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+    <li> <code>created_on</code>: Timestamp of the latest reading.</li>
+    <li> <code>value</code>: Latest recorded temperature</li>
+  </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-sensor-humidity">
+  <p>Get latest sensor humidity data.</p>
+  <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+  </ul>
+  <p>The node outputs a <code>msg.payload</code> with the latest temperature reading in the follwing format:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+    <li> <code>created_on</code>: Timestamp of the latest reading.</li>
+    <li> <code>value</code>: Latest recorded percentage humidity</li>
+  </ul>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-mode">
+  <p>Get current working mode.</p>
+  <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+  </ul>
+  <p>The node outputs a <code>msg.payload</code> with the latest temperature reading in the follwing format:</p>
+  <ul>
+    <li> <code>room_name</code>: The name of the room.</li>
+    <li> <code>location_name</code>: The name of the location.</li>
+    <li> <code>mode</code>: Current mode.</li>
+    <li> <code>value</code>: Value associated with mode.</li>
+  </ul>
+</script>
