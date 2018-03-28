@@ -245,16 +245,47 @@
 
 <script type="text/x-red" data-help-name="ambi-mode">
   <p>Get current working mode.</p>
-  <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>:</p>
-  <ul>
-    <li> <code>room_name</code>: The name of the room.</li>
-    <li> <code>location_name</code>: The name of the location.</li>
-  </ul>
-  <p>The node outputs a <code>msg.payload</code> with the latest temperature reading in the follwing format:</p>
-  <ul>
-    <li> <code>room_name</code>: The name of the room.</li>
-    <li> <code>location_name</code>: The name of the location.</li>
-    <li> <code>mode</code>: Current mode.</li>
-    <li> <code>value</code>: Value associated with mode.</li>
-  </ul>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+
+  <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt>room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>mode
+        <span class="property-type">string</span>
+      </dt>
+      <dd>current mode</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">value
+        <span class="property-type">number</span>
+      </dt>
+      <dd>value associated with mode</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
 </script>
