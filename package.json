@@ -23,6 +23,6 @@
     "email": "alisdair.smyth@gmail.com"
   },
   "dependencies": {
-    "node-ambiclimate": "git://github.com/johnnyxwan/node-ambiclimate.git#aac804d933a7c802564e34be8d5469c577bbbad5"
+    "node-ambiclimate": "git+https://github.com/johnnyxwan/node-ambiclimate.git#aac804d933a7c802564e34be8d5469c577bbbad5"
   }
 }
