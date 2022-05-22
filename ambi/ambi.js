@@ -109,6 +109,57 @@ module.exports = function(RED) {
   }
   RED.nodes.registerType("ambi-comfort-mode", ambiComfort);
 
+  function ambiFeedback(n) {
+    RED.nodes.createNode(this, n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node = this;
+
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var value =
+        typeof msg.payload.value != "undefined"
+          ? msg.payload.value
+          : n.value;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name,
+        value: value
+      };
+
+      if (!room_name || !location_name) {
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
+      } else if (!["too_hot", "too_warm", "bit_warm", "comfortable", "bit_cold", "too_cold", "freezing"].includes(value)) {
+        node.error(
+          RED._("ambi.error.undefined_feedback_value") + value
+        );
+      } else {
+        node.log("Comfort Feedback: Feedback " + value + " for " + room_name + "@" + location_name);
+        client.feedback(settings, function(err, data) {
+          if (err) {
+            node.error(err);
+            return;
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-feedback", ambiFeedback);
+
   function ambiAwayTempLower(n) {
     RED.nodes.createNode(this, n);
 
@@ -470,4 +521,195 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType("ambi-mode", ambiCurrentMode);
+
+  function ambiApplianceStates(n) {
+    RED.nodes.createNode(this, n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node = this;
+
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var limit =
+        typeof msg.payload.limit != "undefined"
+          ? msg.payload.limit
+          : n.limit;
+      var offset =
+        typeof msg.payload.offset != "undefined"
+          ? msg.payload.offset
+          : n.offset;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name,
+        limit: limit,
+        offset: offset
+      };
+
+      if (!room_name || !location_name) {
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
+      } else if (!Number.isInteger(limit) || !Number.isInteger(offset)) {
+        node.error(
+          RED._("ambi.error.invalid_paging_parameter")
+        );
+      } else {
+        node.log("Appliance States: " + room_name + "@" + location_name + " (limit: " + limit + ", offset: " + offset + ")");
+        client.appliance_states(settings, function(err, data) {
+          if (err) {
+            node.error(err);
+          } else {
+            msg.payload = data;
+            msg.payload.room_name = room_name;
+            msg.payload.location_name = location_name;
+            node.send(msg);
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-appliance-states", ambiApplianceStates);
+
+  function ambiDevices(n) {
+    RED.nodes.createNode(this, n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node = this;
+
+    this.on("input", function(msg) {
+      node.log("Get Devices");
+      client.devices(function(err, data) {
+        if (err) {
+          node.error(err);
+        } else {
+          msg.payload = data;
+          node.send(msg);
+        }
+      });
+    });
+  }
+  RED.nodes.registerType("ambi-devices", ambiDevices);
+
+  function ambiIRFeature(n) {
+    RED.nodes.createNode(this, n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node = this;
+
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var settings = {
+        room_name: room_name,
+        location_name: location_name
+      };
+
+      if (!room_name || !location_name) {
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
+      } else {
+        node.log("IR Feature: " + room_name + "@" + location_name);
+        client.ir_feature(settings, function(err, data) {
+          if (err) {
+            node.error(err);
+          } else {
+            msg.payload = data;
+            msg.payload.room_name = room_name;
+            msg.payload.location_name = location_name;
+            node.send(msg);
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-ir-feature", ambiIRFeature);
+
+  function ambiDeployment(n) {
+    RED.nodes.createNode(this, n);
+
+    // Retrieve the config node
+    var oauthClient = RED.nodes.getNode(n.oauthClient);
+    var client = oauthClient.client;
+    var node = this;
+
+    this.on("input", function(msg) {
+      var room_name =
+        typeof msg.payload.room_name != "undefined"
+          ? msg.payload.room_name
+          : n.room_name;
+      var location_name =
+        typeof msg.payload.location_name != "undefined"
+          ? msg.payload.location_name
+          : n.location_name;
+      var mode =
+        typeof msg.payload.mode != "undefined"
+          ? msg.payload.mode
+          : n.mode;
+      var power =
+        typeof msg.payload.power != "undefined"
+          ? msg.payload.power
+          : n.power;
+      var feature =
+        typeof msg.payload.feature != "undefined"
+          ? msg.payload.feature
+          : n.feature;
+      if(typeof feature === 'string') {
+        feature = JSON.parse(feature);
+      }
+      var settings = {
+        room_name: room_name,
+        location_name: location_name,
+        mode: mode,
+        power: power,
+        feature: feature
+      };
+
+      if (!room_name || !location_name) {
+        node.error(
+          RED._("ambi.error.unspecified_device") +
+            room_name +
+            "@" +
+            location_name
+        );
+      } else if (!mode || !power || !feature) {
+        node.error(
+          RED._("ambi.error.missing_deployment_parameter")
+        );
+      } else {
+        node.log("Deployment: " + room_name + "@" + location_name);
+        client.deployment(settings, function(err, data) {
+          if (err) {
+            node.error(err);
+          }
+        });
+      }
+    });
+  }
+  RED.nodes.registerType("ambi-deployment", ambiDeployment);
 };

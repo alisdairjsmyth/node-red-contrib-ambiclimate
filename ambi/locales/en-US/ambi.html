@@ -40,6 +40,33 @@
     <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
 </script>
 
+<script type="text/x-red" data-help-name="ambi-feedback">
+  <p>Send feedback for Comfort mode</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">value
+        <span class="property-type">string</span>
+      </dt>
+      <dd>supported comfort values: too_hot , too_warm , bit_warm , comfortable , bit_cold , too_cold , freezing</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
+</script>
+
 <script type="text/x-red" data-help-name="ambi-away-temp-lower">
   <p>Enable Away mode and set a lower bound for temperature. Ambi will try to keep temperature above the lower bound.</p>
 
@@ -287,5 +314,187 @@
     </dl>
 
   <h3>Details</h3>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-appliance-states">
+  <p>Get Ambi Climate's last N appliance states. Limit controls the number of states to be returned, and offset shifts the results by a number of slots.</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">limit
+        <span class="property-type">int</span>
+      </dt>
+      <dd>limit of the paging</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">offset
+        <span class="property-type">int</span>
+      </dt>
+      <dd>offset of the paging</dd>
+    </dl>
+
+  <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt>room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>paging
+        <span class="property-type">object</span>
+      </dt>
+      <dd>object with two attributes returned: limit and offset</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">data
+        <span class="property-type">object</span>
+      </dt>
+      <dd>array of state objects, please check https://www.npmjs.com/package/node-ambiclimate for more information</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">error
+        <span class="property-type">string</span>
+      </dt>
+      <dd>error message</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>Please check https://www.npmjs.com/package/node-ambiclimate for more information.</p>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-devices">
+  <p>Get users Ambi Climate device information.</p>
+
+  <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">data
+        <span class="property-type">object</span>
+      </dt>
+      <dd>array of device objects, please check https://www.npmjs.com/package/node-ambiclimate for more information</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">error
+        <span class="property-type">string</span>
+      </dt>
+      <dd>error message</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>Please check https://www.npmjs.com/package/node-ambiclimate for more information.</p>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-ir-feature">
+  <p>Get Ambi Climate's appliance IR feature - it returns list of values rather than current state.</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+
+  <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt>room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt>paging
+        <span class="property-type">null</span>
+      </dt>
+      <dd>always null</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">data
+        <span class="property-type">object</span>
+      </dt>
+      <dd>multi-layer object reflect current IR settings, please check https://www.npmjs.com/package/node-ambiclimate for more information</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">error
+        <span class="property-type">string</span>
+      </dt>
+      <dd>error message</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>Please check https://www.npmjs.com/package/node-ambiclimate for more information.</p>
+    <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
+</script>
+
+<script type="text/x-red" data-help-name="ambi-deployment">
+  <p>Create deployment for appliance with Ambi Climate.</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt class="optional">room_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the room</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">location_name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the name of the location</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">mode
+        <span class="property-type">string</span>
+      </dt>
+      <dd>air conditioner mode (fan, dry, heat, auto, cool)</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">power
+        <span class="property-type">string</span>
+      </dt>
+      <dd>air conditioner power state (on, off)</dd>
+    </dl>
+    <dl class="message-properties">
+      <dt class="optional">feature
+        <span class="property-type">string / object</span>
+      </dt>
+      <dd>feature is object with the following attributes temperature, fan and louver</dd>
+    </dl>
+
+  <h3>Details</h3>
+    <p>Please check https://www.npmjs.com/package/node-ambiclimate for more information.</p>
     <p>The node can be configured in the Edit Dialog, or receive parameters in <code>msg.payload</code>.</p>
 </script>

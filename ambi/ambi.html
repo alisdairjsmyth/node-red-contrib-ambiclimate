@@ -136,6 +136,59 @@
 </script>
 
 <!--
+  Comfort Feedback
+-->
+<script type="text/x-red" data-template-name="ambi-feedback">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-value"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.feedback_value"></span></label>
+        <select id="node-input-value">
+            <option value="too_hot">Too hot</option>
+            <option value="too_warm">Too warm</option>
+            <option value="bit_warm">A bit warm</option>
+            <option value="comfortable">Comfortable</option>
+            <option value="bit_cold">A bit cold</option>
+            <option value="too_cold">Too cold</option>
+            <option value="freezing">Freezing</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-feedback",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""},
+            "value": {value:"comfortable"},
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Comfort Feedback";
+        }
+    });
+</script>
+
+<!--
   Away Temperature Lower
 -->
 <script type="text/x-red" data-template-name="ambi-away-temp-lower">
@@ -431,6 +484,181 @@
         color: "#FFFFFF",
         label: function() {
             return this.name || "Current Mode";
+        }
+    });
+</script>
+
+<!--
+  Appliance States
+-->
+<script type="text/x-red" data-template-name="ambi-appliance-states">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-limit"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.limit"></span></label>
+        <input type="text" id="node-input-limit">
+    </div>
+    <div class="form-row">
+        <label for="node-input-offset"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.offset"></span></label>
+        <input type="text" id="node-input-offset">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-appliance-states",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""},
+            "limit": {value:"5"},
+            "offset": {value:"0"}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Appliance States";
+        }
+    });
+</script>
+
+<!--
+  Devices
+-->
+<script type="text/x-red" data-template-name="ambi-devices">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-devices",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Devices";
+        }
+    });
+</script>
+
+<!--
+  IR Feature
+-->
+<script type="text/x-red" data-template-name="ambi-ir-feature">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-ir-feature",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "IR Feature";
+        }
+    });
+</script>
+
+<!--
+  Deployment
+-->
+<script type="text/x-red" data-template-name="ambi-deployment">
+    <div class="form-row">
+        <label for="node-input-oauthClient"><i class="fa fa-key"></i> <span data-i18n="ambi.label.oauthClient"></span></label>
+        <input type="text" id="node-input-oauthClient">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ambi.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]ambi.placeholder.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-room_name"><i class="fa fa-map-marker"></i> <span data-i18n="ambi.label.room_name"></span></label>
+        <input type="text" id="node-input-room_name" data-i18n="[placeholder]ambi.placeholder.room_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location_name"><i class="fa fa-home"></i> <span data-i18n="ambi.label.location_name"></span></label>
+        <input type="text" id="node-input-location_name" data-i18n="[placeholder]ambi.placeholder.location_name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-mode"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.deployment_mode"></span></label>
+        <input type="text" id="node-input-mode">
+    </div>
+    <div class="form-row">
+        <label for="node-input-power"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.deployment_power"></span></label>
+        <input type="text" id="node-input-power">
+    </div>
+    <div class="form-row">
+        <label for="node-input-feature"><i class="fa fa-gear"></i> <span data-i18n="ambi.label.deployment_feature"></span></label>
+        <input type="text" id="node-input-feature">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("ambi-deployment",{
+        category: "ambi",
+        defaults: {
+            "oauthClient" : {value:"",type:"ambi-config"},
+            "room_name": {value:""},
+            "location_name": {value:""},
+            "mode": {value:"cool"},
+            "power": {value:"on"},
+            "feature": {value:"{ \"temperature\":18, \"fan\":\"med\", \"louver\":\"off\" }"}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "debug.png",
+        color: "#FFFFFF",
+        label: function() {
+            return this.name || "Deployment";
         }
     });
 </script>
