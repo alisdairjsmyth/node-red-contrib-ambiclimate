@@ -32,7 +32,7 @@
           "unspecified_device": "Device is neither specified in config or msg.payload: ",
           "undefined_feedback_value": "Feedback value should be one of the defined value (too_hot , too_warm , bit_warm , comfortable , bit_cold , too_cold , freezing), this value is undefined: ",
           "invalid_paging_parameter": "Paging parameters (limit and offset) must be an integer",
-          "no_deployment_parameter": "There should be at least one deployment parameter, please check the README to learn more"
+          "missing_deployment_parameter": "There is/are missing deployment parameter(s), please check the README to learn more"
         }
     }
 }
