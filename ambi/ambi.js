@@ -690,7 +690,10 @@ module.exports = function(RED) {
       }
       var settings = {
         room_name: room_name,
-        location_name: location_name
+        location_name: location_name,
+        mode: mode,
+        power: power,
+        feature: feature
       };
 
       if (!room_name || !location_name) {
