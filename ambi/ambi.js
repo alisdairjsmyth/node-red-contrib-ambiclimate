@@ -553,6 +553,12 @@ module.exports = function(RED) {
         limit: limit,
         offset: offset
       };
+      if (typeof limit === "string") {
+        limit = Number(limit)
+      }
+      if (typeof offset === "string") {
+        offset = Number(offset)
+      }
 
       if (!room_name || !location_name) {
         node.error(
