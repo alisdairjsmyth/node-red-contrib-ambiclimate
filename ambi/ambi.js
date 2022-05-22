@@ -690,11 +690,11 @@ module.exports = function(RED) {
       }
       var settings = {
         room_name: room_name,
-        location_name: location_name,
-        mode: mode,
-        power: power,
-        feature: feature
+        location_name: location_name
       };
+      if(mode) settings.mode = mode;
+      if(power) settings.power = power;
+      if(feature) settings.feature = feature;
 
       if (!room_name || !location_name) {
         node.error(
@@ -703,9 +703,9 @@ module.exports = function(RED) {
             "@" +
             location_name
         );
-      } else if (!mode || !power || !feature) {
+      } else if (!mode && !power && !feature) {
         node.error(
-          RED._("ambi.error.missing_deployment_parameter")
+          RED._("ambi.error.no_deployment_parameter")
         );
       } else {
         node.log("Deployment: " + room_name + "@" + location_name);
