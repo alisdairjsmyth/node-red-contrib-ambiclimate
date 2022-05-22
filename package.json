@@ -23,6 +23,6 @@
     "email": "alisdair.smyth@gmail.com"
   },
   "dependencies": {
-    "node-ambiclimate": "2.1.x"
+    "node-ambiclimate": "2.3.x"
   }
 }
