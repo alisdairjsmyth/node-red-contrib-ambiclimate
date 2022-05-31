@@ -1,15 +1,21 @@
 {
     "ambi" : {
         "label" : {
-          "name":          "Name",
-          "clientId":      "Client Id",
-          "clientSecret":  "Client Secret",
-          "username":      "Username",
-          "password":      "Password",
-          "room_name":     "Room Name",
-          "location_name": "Location Name",
-          "temperature":   "Temperature",
-          "humidity":      "Humidity"
+          "name":               "Name",
+          "clientId":           "Client Id",
+          "clientSecret":       "Client Secret",
+          "username":           "Username",
+          "password":           "Password",
+          "room_name":          "Room Name",
+          "location_name":      "Location Name",
+          "temperature":        "Temperature",
+          "humidity":           "Humidity",
+          "feedback_value":     "Feedback",
+          "limit":              "Paging Limit",
+          "offset":             "Paging Offset",
+          "deployment_mode":    "Mode",
+          "deployment_power":   "Power",
+          "deployment_feature": "Feature"
         },
         "placeholder" : {
           "name":          "Name",
@@ -23,7 +29,10 @@
           "humidity":      "Target percentage relative humidity"
         },
         "error" : {
-          "unspecified_device": "Device is neither specified in config or msg.payload: "
+          "unspecified_device": "Device is neither specified in config or msg.payload: ",
+          "undefined_feedback_value": "Feedback value should be one of the defined value (too_hot , too_warm , bit_warm , comfortable , bit_cold , too_cold , freezing), this value is undefined: ",
+          "invalid_paging_parameter": "Paging parameters (limit and offset) must be an integer",
+          "missing_deployment_parameter": "There is/are missing deployment parameter(s), please check the README to learn more"
         }
     }
 }

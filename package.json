@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-ambiclimate",
   "description": "A collection of Node-RED nodes to control Ambi Climate devices.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alisdairjsmyth/node-red-contrib-ambiclimate.git"
@@ -23,6 +23,6 @@
     "email": "alisdair.smyth@gmail.com"
   },
   "dependencies": {
-    "node-ambiclimate": "2.1.x"
+    "node-ambiclimate": "git+https://github.com/johnnyxwan/node-ambiclimate.git#06391cc87a8d5770c8c65f166d3d7b2e91915438"
   }
 }
